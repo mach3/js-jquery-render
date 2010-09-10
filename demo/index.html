@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>[DEMO] jquery.render.js</title>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+	<script type="text/javascript" src="../jquery.render.js"></script>
+	<style type="text/css">
+	#test01{
+		border-collapse:collapse;
+	}
+	#test01 th, #test01 td{
+		border:1px solid #ccc;
+		padding:3px;
+		text-align:center;
+	}
+	#test01 th{
+		background-color:#eee;
+	}
+	</style>
+</head>
+<body>
+<table id="test01">
+	<caption>Internet Explorer's Birthday</caption>
+	<thead>
+		<tr>
+			<th>Version</th>
+			<th>Birthday</th>
+			<th>Unsupported</th>
+		</tr>
+	</thead>
+	<tbody>
+	</tbody>
+</table>
+
+<!-- template -->
+<script type="text/html" id="template-test01">
+<tr>
+	<td>{{version}}</td>
+	<td>{{birthDay}}</td>
+	<td>{{unsupported}}</td>
+</tr>
+</script>
+<!-- /template -->
+
+<script type="text/javascript">
+var data01 = [
+	{ version:"8", birthDay:"2009/3/20", unsupported:"-" },
+	{ version:"7", birthDay:"2006/11/2", unsupported:"-" },
+	{ version:"6", birthDay:"2001/8/27", unsupported:"2014/4/8" },
+	{ version:"5.5", birthDay:"2000/7/13", unsupported:"2005/12/31" },
+	{ version:"5", birthDay:"1999/3/18", unsupported:"2010/7/13" }
+];
+$("#template-test01").render( data01 ).appendTo($("#test01 tbody"));
+</script>
+
+</body>
+</html>

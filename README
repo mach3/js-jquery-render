@@ -1,0 +1,7 @@
+jquery.render.js
+
+[version] 1.0
+[author] mach3
+[requires] jQuery http://jquery.com
+
+Function to render HTML from template and data.
