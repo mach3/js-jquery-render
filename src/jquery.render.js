@@ -1,13 +1,3 @@
-/*!
- * js-jquery-render
- * -------------
- * Simple template method for jQuery
- * 
- * @version 1.1.0
- * @license MIT
- * @author mach3 <http://github.com/mach3>
- * @require jquery#1
- */
 (function($, undefined){
 
     $.fn.extend({

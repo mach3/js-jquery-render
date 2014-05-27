@@ -1,58 +1,152 @@
-<!DOCTYPE HTML>
-<html lang="ja">
+<!doctype html>
+<html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>[DEMO] jquery.render.js</title>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-	<script type="text/javascript" src="../jquery.render.js"></script>
-	<style type="text/css">
-	#test01{
-		border-collapse:collapse;
-	}
-	#test01 th, #test01 td{
-		border:1px solid #ccc;
-		padding:3px;
-		text-align:center;
-	}
-	#test01 th{
-		background-color:#eee;
-	}
-	</style>
+    <meta charset="UTF-8">
+    <title>Demo</title>
+    <style>
+
+        html, body {
+            background-color: #eee;
+            margin: 0;
+        }
+        article {
+            display: block;
+            width: 80%;
+            padding: 2em;
+            margin: 0 auto;
+            background-color: #fff;
+        }
+        section {
+            display: block;
+            margin: 2em 0;
+        }
+        section:first-child {
+            margin-top: 0;
+        }
+        h1 {
+            margin: 0 0 .5em 0;
+            font-size: 2em;
+        }
+        p, dl, table {
+            margin-left: 1em;
+            font-size: 1em;
+        }
+        dt {
+            font-weight: bold;
+        }
+        table {
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: .5em 1em;
+        }
+        th {
+            background-color: #eee;
+        }
+
+    </style>
 </head>
 <body>
-<table id="test01">
-	<caption>Internet Explorer's Birthday</caption>
-	<thead>
-		<tr>
-			<th>Version</th>
-			<th>Birthday</th>
-			<th>Unsupported</th>
-		</tr>
-	</thead>
-	<tbody>
-	</tbody>
-</table>
 
-<!-- template -->
-<script type="text/html" id="template-test01">
-<tr>
-	<td>{{version}}</td>
-	<td>{{birthDay}}</td>
-	<td>{{unsupported}}</td>
-</tr>
-</script>
-<!-- /template -->
+    <article>
+        <section>
+            <h1>Demo: No Data</h1>
+            <div id="demo-no-data"></div>
+        </section>
+        <section>
+            <h1>Demo: Object</h1>
+            <div id="demo-object"></div>
+        </section>
+        <section>
+            <h1>Demo: Array</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Version</th>
+                        <th>Birthday</th>
+                        <th>Unsupported</th>
+                    </tr>
+                </thead>
+                <tbody id="demo-array"></tbody>
+            </table>
+        </section>
+        <section>
+            <h1>Demo: Return String</h1>
+            <pre><code id="demo-return-string"></code></pre>
+        </section>
+    </article>
 
-<script type="text/javascript">
-var data01 = [
-	{ version:"8", birthDay:"2009/3/20", unsupported:"-" },
-	{ version:"7", birthDay:"2006/11/2", unsupported:"-" },
-	{ version:"6", birthDay:"2001/8/27", unsupported:"2014/4/8" },
-	{ version:"5.5", birthDay:"2000/7/13", unsupported:"2005/12/31" },
-	{ version:"5", birthDay:"1999/3/18", unsupported:"2010/7/13" }
-];
-$("#template-test01").render( data01 ).appendTo($("#test01 tbody"));
-</script>
+    <script src="../bower_components/jquery/dist/jquery.js"></script>
+    <script src="../src/jquery.render.js"></script>
+
+    <script type="text/template" id="template-no-data">
+        <p>
+            <strong>No Data</strong>
+            {{key}}
+            <!-- this key is ignored -->
+        </p>
+    </script>
+    <!-- #template-no-data -->
+
+    <script type="text/template" id="template-object">
+        <dl>
+            <dt>Name</dt>
+            <dd>{{name}}</dd>
+            <dt>Age</dt>
+            <dd>{{age}}</dd>
+            <dt>Email</dt>
+            <dd>{{email}}</dd>
+        </dl>
+    </script>
+    <!-- /#template-object -->
+
+    <script type="text/template" id="template-array">
+        <tr>
+            <th>{{version}}</th>
+            <td>{{birthDay}}</td>
+            <td>{{unsupported}}</td>
+        </tr>
+    </script>
+    <!-- /#template-array -->
+
+    <script>
+
+        // Demo: No Data
+        (function(){
+            $("#template-no-data").render().appendTo("#demo-no-data");
+        }());
+
+        // Demo: Object
+        (function(){
+            $("#template-object").render({
+                name: "John",
+                age: 26,
+                email: "john@example.com"
+            })
+            .appendTo("#demo-object");
+        }());
+
+        // Demo: Array
+        // Demo: Return String
+        (function(){
+            var data = [
+                { version: "11", birthDay: "2013/10/17", unsupported: "-" },
+                { version: "10", birthDay: "2012/8/15", unsupported: "-" },
+                { version: "9", birthDay: "2011/3/15", unsupported: "-" },
+                { version: "8", birthDay: "2009/3/20", unsupported: "-" },
+                { version: "7", birthDay: "2006/10/18", unsupported: "-" },
+                { version: "6", birthDay: "2001/8/27", unsupported: "2014/4/9" },
+                { version: "5.5", birthDay: "2000/7/13", unsupported: "2005/12/31" },
+                { version: "5", birthDay: "1999/3/18", unsupported: "2010/7/13" }
+            ];
+            $("#template-array").render(data).appendTo("#demo-array");
+            $("#demo-return-string").text(
+                $("#template-array").render(data, false)
+            );
+        }());
+
+    </script>
 
 </body>
 </html>

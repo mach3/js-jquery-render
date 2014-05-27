@@ -1,0 +1,25 @@
+{
+  "name": "js-jquery-render",
+  "version": "1.1.0",
+  "description": "Simple template method for jQuery",
+  "main": "jquery.render.js",
+  "keywords": [
+    "jquery",
+    "template",
+    "render"
+  ],
+  "authors": [
+    "mach3 <http://github.com/mach3>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "1"
+  }
+}
